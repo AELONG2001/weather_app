@@ -96,7 +96,7 @@ const useStyles = makeStyles({
     minWidth: '100px',
     '& .MuiTypography-h5': {
       color: '#bcc2ca',
-      fontSize: '1.8rem !important',
+      fontSize: '1.6rem !important',
       textTransform: 'uppercase',
     },
 
@@ -164,7 +164,7 @@ export default function WeatherInfoMain({
         <Box className={classes.weatherInfoParameterDesc}>
           <Typography variant="h5">Gió</Typography>
           <Typography variant="body1">
-            {`${Math.round(wind)}km/giờ`}{' '}
+            {`${Math.round(wind)}km/giờ`}
             <svg
               width="14"
               height="14"

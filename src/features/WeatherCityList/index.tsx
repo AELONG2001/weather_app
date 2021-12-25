@@ -10,11 +10,13 @@ import showerRainImg from 'assets/image/shower_rain.jpg';
 import rainImg from 'assets/image/rain.jpg';
 import thunderstormImg from 'assets/image/thunderstorm.jpg';
 import snowImg from 'assets/image/snow.jpg';
+import brouillardImg from 'assets/image/brouillard.jpg';
+import { WeatherInfoCity, weatherInfoCurrentTotal } from 'models';
 
 export interface IWeatherCityListProps {
   cityName: any;
-  cityList: any;
-  dataCurrent: any;
+  cityList: WeatherInfoCity[];
+  dataCurrent: weatherInfoCurrentTotal;
 }
 
 const useStyles = makeStyles({
@@ -118,7 +120,7 @@ export default function WeatherCityList({
     return hour + ':' + minute;
   };
 
-  const iconImg = dataCurrent.current.weather[0].icon;
+  const iconImg = JSON.parse(localStorage.getItem('iconImg') as string);
 
   return (
     <Box
@@ -133,21 +135,21 @@ export default function WeatherCityList({
         className={classes.cardBox}
         style={{
           backgroundImage: `url('${
-            iconImg === '01n'
+            iconImg === '01d'
               ? clearSkyImg
-              : iconImg === '02n'
+              : iconImg === '02d' || '02n'
               ? fewCloudImg
-              : iconImg === '03n'
+              : iconImg === '03d' || '03n'
               ? scatteredImg
-              : iconImg === '04n'
+              : iconImg === '04d' || '04n'
               ? brokenCloudImg
-              : iconImg === '09n'
+              : iconImg === '09d' || '09n'
               ? showerRainImg
-              : iconImg === '10n'
+              : iconImg === '10d' || '10n'
               ? rainImg
-              : iconImg === '11n'
+              : iconImg === '11d' || '11n'
               ? thunderstormImg
-              : iconImg === '13n'
+              : iconImg === '13d' || '13n'
               ? snowImg
               : clearSkyImg
           }')`,
@@ -188,28 +190,30 @@ export default function WeatherCityList({
         </CardContent>
       </Card>
 
-      {cityList.map((city: any, idx: any) => (
+      {cityList.map((city, idx) => (
         <Card
           key={idx}
           className={classes.cardBox}
           style={{
             backgroundImage: `url('${
-              city.weather[0].icon === '01d' || '01n'
+              city.weather[0].icon === '01d'
                 ? clearSkyImg
-                : city.weather[0].icon === '02d' || '02n'
+                : city.weather[0].icon === '02d'
                 ? fewCloudImg
-                : city.weather[0].icon === '03d' || '03d'
+                : city.weather[0].icon === '03d'
                 ? scatteredImg
-                : city.weather[0].icon === '04d' || '04n' || '50d' || '50n'
+                : city.weather[0].icon === '04d'
                 ? brokenCloudImg
-                : city.weather[0].icon === '09d' || '09n'
+                : city.weather[0].icon === '09d'
                 ? showerRainImg
-                : city.weather[0].icon === '10d' || '10n'
+                : city.weather[0].icon === '10d'
                 ? rainImg
-                : city.weather[0].icon === '11d' || '11n'
+                : city.weather[0].icon === '11d'
                 ? thunderstormImg
-                : city.weather[0].icon === '13d' || '13n'
+                : city.weather[0].icon === '13d'
                 ? snowImg
+                : city.weather[0].icon === '50d'
+                ? brouillardImg
                 : clearSkyImg
             }')`,
           }}

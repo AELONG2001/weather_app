@@ -1,4 +1,5 @@
 /** @format */
 
 export * from './common';
-export * from './weatherInfo';
+export * from './weatherInfoCity';
+export * from './weatherInfoCurrent';

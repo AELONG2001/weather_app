@@ -1,12 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Hourly } from 'models';
 import React from 'react';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export interface IWeatherForecastTimeProps {
-  hourlyArr: any;
+  hourlyArr: Hourly[];
 }
 
 const useStyles = makeStyles({
@@ -58,7 +59,7 @@ export default function WeatherForecastTime({ hourlyArr }: IWeatherForecastTimeP
           },
         }}
       >
-        {hourlyArr.map((hour: any, idx: any) => (
+        {hourlyArr.map((hour, idx) => (
           <SwiperSlide key={idx}>
             <Box className={classes.weatherBox}>
               <Typography variant="h6">{displayTime(hour.dt)}</Typography>

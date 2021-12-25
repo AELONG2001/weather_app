@@ -14,6 +14,9 @@ import showerRainImg from 'assets/image/shower_rain.jpg';
 import rainImg from 'assets/image/rain.jpg';
 import thunderstormImg from 'assets/image/thunderstorm.jpg';
 import snowImg from 'assets/image/snow.jpg';
+import brouillardImg from 'assets/image/brouillard.jpg';
+import { WeatherInfoCity, weatherInfoCurrentTotal } from 'models';
+import { WeatherInfoCityByName } from 'models/weatherInfoCityByName';
 
 const useStyles = makeStyles({
   backgroundWeather: {
@@ -43,46 +46,54 @@ function App() {
       });
 
       //get data by current
-      const result = await weatherApi.getCurrentWeather('/onecall', {
-        lat: lat,
-        lon: long,
-        units: 'metric',
-        appid: 'c76bf5715dc31f38fa30eada6a816861',
-        lang: 'vi',
-      });
+      const result: weatherInfoCurrentTotal | WeatherInfoCityByName =
+        await weatherApi.getCurrentWeather('/onecall', {
+          lat: lat,
+          lon: long,
+          units: 'metric',
+          appid: 'c76bf5715dc31f38fa30eada6a816861',
+          lang: 'vi',
+        });
       setData(result);
 
       //get city current
-      const myCity = await weatherApi.getCurrentWeather('/weather', {
-        lat: lat,
-        lon: long,
-        units: 'metric',
-        appid: 'c76bf5715dc31f38fa30eada6a816861',
-        lang: 'vi',
-      });
+      const myCity: weatherInfoCurrentTotal | WeatherInfoCityByName =
+        await weatherApi.getCurrentWeather('/weather', {
+          lat: lat,
+          lon: long,
+          units: 'metric',
+          appid: 'c76bf5715dc31f38fa30eada6a816861',
+          lang: 'vi',
+        });
       setCityCurrent(myCity);
 
       //get data by City
-      const dataCityWeatherHaNoi = await weatherApi.getWeatherByCity('/weather', {
+      const dataCityWeatherHaNoi: WeatherInfoCity = await weatherApi.getWeatherByCity('/weather', {
         id: 1581129,
         units: 'metric',
         appid: 'c76bf5715dc31f38fa30eada6a816861',
         lang: 'vi',
       });
 
-      const dataCityWeatherNewYork = await weatherApi.getWeatherByCity('/weather', {
-        id: 5128581,
-        units: 'metric',
-        appid: 'c76bf5715dc31f38fa30eada6a816861',
-        lang: 'es',
-      });
+      const dataCityWeatherNewYork: WeatherInfoCity = await weatherApi.getWeatherByCity(
+        '/weather',
+        {
+          id: 5128581,
+          units: 'metric',
+          appid: 'c76bf5715dc31f38fa30eada6a816861',
+          lang: 'es',
+        }
+      );
 
-      const dataCityWeatherLosAngles = await weatherApi.getWeatherByCity('/weather', {
-        id: 1705545,
-        units: 'metric',
-        appid: 'c76bf5715dc31f38fa30eada6a816861',
-        lang: 'es',
-      });
+      const dataCityWeatherLosAngles: WeatherInfoCity = await weatherApi.getWeatherByCity(
+        '/weather',
+        {
+          id: 1705545,
+          units: 'metric',
+          appid: 'c76bf5715dc31f38fa30eada6a816861',
+          lang: 'es',
+        }
+      );
 
       const listCityData = [];
       listCityData.push(dataCityWeatherHaNoi, dataCityWeatherNewYork, dataCityWeatherLosAngles);
@@ -105,20 +116,22 @@ function App() {
         backgroundImage: `url('${
           iconImg === '01n'
             ? clearSkyImg
-            : iconImg === '02n'
+            : iconImg === '02d' || '02n'
             ? fewCloudImg
-            : iconImg === '03n'
+            : iconImg === '03d' || '03n'
             ? scatteredImg
-            : iconImg === '04n'
+            : iconImg === '04d' || '04n'
             ? brokenCloudImg
-            : iconImg === '09n'
+            : iconImg === '09d' || '09n'
             ? showerRainImg
-            : iconImg === '10n'
+            : iconImg === '10d' || '10n'
             ? rainImg
-            : iconImg === '11n'
+            : iconImg === '11d' || '11n'
             ? thunderstormImg
-            : iconImg === '13n'
+            : iconImg === '13d' || '13n'
             ? snowImg
+            : iconImg === '50d'
+            ? brouillardImg
             : clearSkyImg
         }')`,
       }}

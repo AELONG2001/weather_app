@@ -2,10 +2,11 @@
 
 import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { WeatherInfoCityByName } from 'models/weatherInfoCityByName';
 import React from 'react';
 
 export interface IAddressProps {
-  cityName: any;
+  cityName: WeatherInfoCityByName;
 }
 
 const useStyles = makeStyles({

@@ -9,11 +9,13 @@ import WeatherInfoMain from './components/WeatherInfo/WeatherInfoMain';
 import WeatherForecastTime from 'features/WeatherForecastTime';
 import WeatherForeCastDay from 'features/WeatherForecastDay';
 import WeatherCityList from 'features/WeatherCityList';
+import { WeatherInfoCity, weatherInfoCurrentTotal } from 'models';
+import { WeatherInfoCityByName } from 'models/weatherInfoCityByName';
 
 export interface IWeatherProps {
-  myCity: any;
-  weatherData: any;
-  dataByCity: any;
+  myCity: WeatherInfoCityByName;
+  weatherData: weatherInfoCurrentTotal;
+  dataByCity: WeatherInfoCity[];
 }
 
 export default function Weather({ weatherData, dataByCity, myCity }: IWeatherProps) {
@@ -23,7 +25,7 @@ export default function Weather({ weatherData, dataByCity, myCity }: IWeatherPro
   //getWeather by days
   const weatherListDays = weatherData.daily;
 
-  console.log(weatherData.daily[0]);
+  console.log(dataByCity);
 
   return (
     <Box>

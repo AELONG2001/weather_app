@@ -1,13 +1,13 @@
-export interface Clouds {
+export interface CloudsCity {
   all: string;
 }
 
-export interface Coord {
+export interface CoordCity {
   lon: number;
   lat: number;
 }
 
-export interface Main {
+export interface MainCity {
   feels_like: number;
   grnd_level: number;
   humidity: number;
@@ -18,7 +18,7 @@ export interface Main {
   temp_min: number;
 }
 
-export interface Sys {
+export interface SysCity {
   country: string;
   id: number;
   sunrise: number;
@@ -26,31 +26,31 @@ export interface Sys {
   type: number;
 }
 
-export interface Weather {
+export interface WeatherCityByName {
   description: string;
   icon: string;
   id: number;
   main: string;
 }
 
-export interface Wind {
-  speed: number;
+export interface WindCity {
   deg: number;
   gust: number;
+  speed: number;
 }
 
-export interface WeatherInfo {
+export interface WeatherInfoCityByName {
   base: string;
+  clouds: CloudsCity;
   cod: number;
-  clouds: Clouds;
-  coord: Coord;
+  coord: CoordCity;
   dt: number;
   id: number;
-  main: Main;
+  main: MainCity;
   name: string;
-  sys: Sys;
+  sys: SysCity;
   timezone: number;
   visibility: number;
-  weather: Weather[];
-  wind: Wind;
+  weather: WeatherCityByName[];
+  wind: WindCity;
 }

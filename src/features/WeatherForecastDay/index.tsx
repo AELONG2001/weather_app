@@ -1,12 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Daily } from 'models';
 import React from 'react';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export interface IWeatherForecastTimeProps {
-  dayArr: any;
+  dayArr: Daily[];
 }
 
 const useStyles = makeStyles({
@@ -81,7 +82,7 @@ export default function WeatherForecastDay({ dayArr }: IWeatherForecastTimeProps
           },
         }}
       >
-        {dayArr.map((day: any, idx: any) => (
+        {dayArr.map((day, idx) => (
           <SwiperSlide key={idx}>
             <Box className={classes.weatherBox2}>
               <Typography variant="h6">{displayDay(day.dt)}</Typography>
